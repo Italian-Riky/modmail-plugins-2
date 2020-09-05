@@ -18,7 +18,7 @@ class UnicodeEmoji(commands.Converter):
 Emoji = typing.Union[discord.PartialEmoji, discord.Emoji, UnicodeEmoji]
 
 class ReactionRoles(commands.Cog):
-    """Assegna ruoli ai tuoi membri con delle semplicissime reazioni! (Plugin tradotto da [Italian Riky](https://github.com/Italian-Riky])"""
+    """Assegna ruoli ai tuoi membri con delle semplicissime reazioni! (Plugin tradotto da [Italian Riky](https://github.com/Italian-Riky))"""
 
     def __init__(self, bot):
         self.bot = bot
