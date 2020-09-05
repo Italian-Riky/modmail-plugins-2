@@ -7,24 +7,24 @@ from core import checks
 from core.models import PermissionLevel
 
 class ServerStats(commands.Cog): 
-    """Interesting and accurate statistics about your server."""
+    """Statistiche accurate sul tuo server.(Plugin tradotto da [Italian Riky](https://github.com/Italian-Riky))"""
     
     def __init__(self, bot):
         self.bot = bot
-        self.c_name = "📊 | Server Info"
+        self.c_name = "📊 | Info sul server"
         self.db = bot.plugin_db.get_partition(self)
         
     @commands.command() 
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
     async def vcsetup(self, ctx):
-        """Sets up all the server stats Voice Channels."""
+        """Imposta tutti i canali vocali sullo stato del server."""
 
         if discord.utils.find(lambda c: c.name == self.c_name, ctx.guild.categories) is None:
             category = await ctx.guild.create_category(name=self.c_name, overwrites={ctx.guild.default_role: discord.PermissionOverwrite(connect=False)})
             await category.edit(position=0)
             humans = self.get_humans(ctx)
             bots = self.get_bots(ctx)
-            names = ["Member Count", "Role Count", "Channel Count", "Total Humans", "Total Bots"]
+            names = ["Numero totale di membri", "Numero di ruoli", "Canali totali", "Numero di umani", "Numero di Bots"]
             counts = [ctx.guild.member_count, len(ctx.guild.roles), len(ctx.guild.channels), humans, bots]
             checks = ["m", "r", "c", "h", "b"]
             for name, count, check in zip(names, counts, checks):
@@ -32,16 +32,16 @@ class ServerStats(commands.Cog):
                 self.db.find_one_and_update({"_id": "config"}, {"$set": {f"{check}Channel": name}}, upsert=True)
             
             embed = discord.Embed(color = discord.Color.green())
-            embed.add_field(name="Success", value="Successfully Setup all the Server Info Voice Channels!")
+            embed.add_field(name="Successo", value="Impostati tutti i canali vocali con successo!")
             embed.timestamp = datetime.datetime.utcnow()
             await ctx.send(embed=embed)
             
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
     async def membercount(self, ctx, *, name: str=None):
-        """Sets up the Member Count Voice Channel."""
+        """Imposta il canale vocale per tutti i membri."""
 
-        name = name or "Member Count"
+        name = name or "Numero totale di membri"
         await self.create_channel(ctx, name, ctx.guild.member_count)
 
         self.db.find_one_and_update({"_id": "config"}, {"$set": {"mChannel": name}}, upsert=True)
@@ -49,9 +49,9 @@ class ServerStats(commands.Cog):
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
     async def rolecount(self, ctx, *, name: str=None):
-        """Sets up the Role Count Voice Channel.""" 
+        """Imposta il canale vocale per i ruoli.""" 
 
-        name = name or "Role Count"
+        name = name or "Numero di ruoli"
         await self.create_channel(ctx, name, len(ctx.guild.roles))
 
         self.db.find_one_and_update({"_id": "config"}, {"$set": {"rChannel": name}}, upsert=True)
@@ -59,9 +59,9 @@ class ServerStats(commands.Cog):
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
     async def channelcount(self, ctx, *, name: str=None):
-        """Sets up the Channel Count Voice Channel"""
+        """Imposta il canale vocale per i canali."""
 
-        name = name or "Channel Count"
+        name = name or "Canali totali"
         await self.create_channel(ctx, name, len(ctx.guild.channels))
 
         self.db.find_one_and_update({"_id": "config"}, {"$set": {"cChannel": name}}, upsert=True)
@@ -69,9 +69,9 @@ class ServerStats(commands.Cog):
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
     async def totalhuman(self, ctx, *, name: str=None):
-        """Sets up the Total Humans Voice Channel"""
+        """Imposta il canale vocale per tutti gli umani"""
 
-        name = name or "Total Humans"
+        name = name or "Numero di umani"
         humans = self.get_humans(ctx)
         await self.create_channel(ctx, name, int(humans))
 
@@ -80,9 +80,9 @@ class ServerStats(commands.Cog):
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
     async def totalbot(self, ctx, *, name: str=None):
-        """Sets up the Total Bots Voice Channel"""
+        """Imposta il canale vocale per tutti i Bots"""
         
-        name = name or "Total Bots"
+        name = name or "Numero di Bots"
         bots = self.get_bots(ctx)
         await self.create_channel(ctx, name, int(bots))
 
@@ -91,7 +91,7 @@ class ServerStats(commands.Cog):
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
     async def fixvc(self, ctx):
-        """Fix broken VC counts"""
+        """Sistema i Canali Vocali rotti"""
         guild = ctx.guild
         humans = self.get_humans(ctx)
         bots = self.get_bots(ctx)
@@ -104,7 +104,7 @@ class ServerStats(commands.Cog):
                 num = checks.index(check)
                 value = matching[num] 
                 await self.update_channel(ctx, doc[f'{check}Channel'], value)
-        await ctx.send('Fixed all Counts!')
+        await ctx.send('Sistemati tutti i contatori!')
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
@@ -195,12 +195,12 @@ class ServerStats(commands.Cog):
                 category = await ctx.guild.create_category(name=self.c_name, overwrites={ctx.guild.default_role: discord.PermissionOverwrite(connect=False)})
                 await category.edit(position=0)
             await ctx.guild.create_voice_channel(name=f"{name}: {count}", category=category)
-            embed.add_field(name="Success", value= f"The {name} Channel has been set up.")
+            embed.add_field(name="Success", value= f"Il {name} è gia stato impostato.")
             embed.color = discord.Color.green()
             await ctx.send(embed=embed)
             return
         
-        embed.add_field(name="Failure", value= f"The {name} channel has already been set up.")
+        embed.add_field(name="Failure", value= f"Il {name} è gia stato impostato.")
         embed.color = discord.Color.red()
         await ctx.send(embed=embed)
         return 
