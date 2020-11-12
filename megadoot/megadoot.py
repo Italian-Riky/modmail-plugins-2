@@ -4,68 +4,71 @@ import discord
 from discord.ext import commands
 
 class Megadoot(commands.Cog):
+    """
+    Divertiti con questo plugin! (Plugin tradotto da [Italian Riky](https://github.com/Italian-Riky))
+    """
     def __init__(self, bot):
         self.bot = bot
         self.fights = [
-            '{0} tried to throw a snowball at {1} but it hits Dabbit\'s car, and Dabbit is not pleased!',
-            '{0} tackled {1} down with a fish.',
-            '{0} fought {1}, but it was not effective...',
-            '{0} tried to throw a bucket of water at {1}, but accidentally threw it all over {2}!',
-            '{0} got tired of ks’ puns and tried to fight but accidentally hit {1}',
-            '{0} tried to hit {1}, but {1} had a reverse card up their sleeve so {0} got hit instead',
-            '{0} tried to fight {1}, but ended up being given cereal soup by Dabbit.',
-            '{0} tried to attack {1}, but they slipped and crashed into Ghoul\'s car, making a huge cat shaped dent in the hood',
-            '{0} tried to fight {1} but was attacked by a gang of kittens',
-            '{0} challenged {1} to a race in Mario Kart but the CPU won instead!',
-            '{1} dodged a mighty fine swing from {0}, and then backhanded {0} in self defense.',
-            '{0} begged their pet to attack {1}, but the pet stared back with no indication of understanding.',
-            '{0} fought like a dog, but {1} fought back like a bear, winning the fight!',
-            'A wild {1} appears!\n{1} uses Bite! It\'s not very effective...\n{0} uses Mega Punch! It\'s very effective!\n{0} has won!',
-            'As {0} ran all sweaty and tired reaching out for a last punch, {1} dashed to the side, leaving {0} tumbling onto the ground.',
-            '{0} tried to modify the Dupe Bomber 3000 to take down {1} with tons of dupe reports, but Dannysaur got there first and denied them all... Which broke the machine.',
-            '{0} Mega Evolved and tried to wipe out {1} with Hyper Beam! But {1} used Mimic and reversed it back onto {0} instead!',
-            '{0} threw a snowball at {1} but unfortunately it hits a window at Discord HQ. Oops',
-            '{0} tricked {1} into waking up the Sleeping Pizza. The Sleeping Pizza does not like being woken up, so it turned both {0} and {1} into Calzone Pizza. Rest In Pepperoni.',
-            '{0} went to tackle {1}, but they did a dank meme and lowkey dabbed out of the way',
-            '{0} hit the Smash ball, but fell off the stage before they could use it on {1}',
-            '{0} threw a pokeball at {1}, but it was only a Goldeen'
+            '{0} ha provato a lanciare una palla di neve a {1} ma colpisce la macchina di Dabbit e Dabbit non è contento! ",
+            "{0} placcato {1} con un pesce.",
+            "{0} ha combattuto {1}, ma non è stato efficace ...",
+            "{0} ha provato a lanciare un secchio d'acqua a {1}, ma l'ha gettato accidentalmente dappertutto {2}!",
+            "{0} si è stancato dei giochi di parole di ks e ha cercato di combattere ma ha colpito accidentalmente {1}",
+            "{0} ha provato a colpire {1}, ma {1} aveva una carta inversa nella manica, quindi {0} è stato colpito invece",
+            "{0} ha cercato di combattere {1}, ma alla fine Dabbit ha ricevuto una zuppa di cereali.",
+            "{0} ha tentato di attaccare {1}, ma sono scivolati e si sono schiantati contro l'auto di Ghoul, facendo un'enorme ammaccatura a forma di gatto sul cofano",
+            "{0} ha cercato di combattere {1} ma è stato attaccato da una banda di gattini",
+            "{0} ha sfidato {1} una gara in Mario Kart ma la CPU ha vinto invece!",
+            "{1} ha schivato uno swing potente e raffinato da {0} e poi ha rovesciato {0} per legittima difesa.",
+            "{0} ha implorato il proprio animale domestico di attaccare {1}, ma l'animale lo ha guardato senza alcuna indicazione di comprensione.",
+            "{0} ha combattuto come un cane, ma {1} ha reagito come un orso, vincendo il combattimento!",
+            'Appare un {1} selvaggio! \n {1} usa Bite! Non è molto efficace ... \n {0} usa Mega Punch! È molto efficace! \n {0} ha vinto! ",
+            "Mentre {0} correva tutto sudato e stanco, allungando la mano per un ultimo pugno, {1} si precipitò di lato, lasciando {0} cadere a terra.",
+            "{0} ha provato a modificare il Dupe Bomber 3000 per abbattere {1} con tonnellate di segnalazioni di stupidi, ma Dannysaur è arrivato per primo e li ha negati tutti ... il che ha rotto la macchina.",
+            "{0} si è megaevoluto e ha cercato di eliminare {1} con Hyper Beam! Ma {1} ha usato Mimic e invece l'ha invertito su {0}! ",
+            "{0} ha lanciato una palla di neve contro {1} ma sfortunatamente colpisce una finestra in Discord HQ. Ops ',
+            "{0} ha indotto {1} a svegliare la pizza addormentata. The Sleeping Pizza non ama essere svegliato, quindi ha trasformato {0} e {1} in Calzone Pizza. Rest In Pepperoni. ",
+            "{0} è andato per affrontare {1}, ma hanno fatto un meme umido e si sono tolti di mezzo",
+            "{0} ha colpito la palla Smash, ma è caduto dal palco prima che potessero usarlo su {1}",
+            "{0} ha lanciato una pokeball a {1}, ma era solo un Goldeen"
             ]
         
         self.hugs = [
-            '{0} gave {1} an awkward hug.',
-            '{0} pretended to give {1} a hug, but put a "Kick Me" sign on them.',
-            '{0} gave {1} a great bear hug!',
-            '{1}, {0} just gave you the best hug of your life!',
-            '{0} gave {1} a friendly little hug.',
-            '{0} tried to give {1} a hug but was denied.',
-            '{0} tackle-hugs {1}.',
-            '{0} gave {1} a bog standard hug',
-            '{1} accidentally reported the wrong thing so {0} gave them a hug to stop {1} from crying',
-            '{0} gives {1} a cereal soupy hug',
-            '{0} hugged {1} so hard, they exploded in a cloud of pepperonis',
-            '{0} goes to hug {1}, what a good friendship.',
-            '{0} successfully hugs {1} with the power of the Wumpus.',
-            '{0} sent {1} some love, do I get some too?',
-            '{1} ducked when {0} tried to hug them.',
-            '{0} hugged {1} but {1} took it as an attack!',
-            '{0} fills {1} with sweet love',
-            '{0} gave {1} a Legacy Hug, in recognition of the legendary Dabbit Prime.',
-            'Is {0} sure they want to hug {1}? Sure thing, as they just did!',
-            '{0} attempts to hug {1} but Dannysaur threw a banana peel on the floor and made {0} slip',
-            '{1} is confused if cereal is soup or salad, so {0} hugged {1} to calm them down'
+            "{0} ha dato {1} un imbarazzante abbraccio.",
+            "{0} ha finto di dare {1} un abbraccio, ma ha messo un cartello" Kick Me "su di loro.",
+            "{0} ha dato {1} un grande abbraccio da orso!",
+            "{1}, {0} ti ha appena dato il miglior abbraccio della tua vita!",
+            "{0} ha dato {1} un piccolo abbraccio amichevole.",
+            "{0} ha cercato di abbracciare {1} ma è stato rifiutato.",
+            "{0} tackle-hugs {1}.",
+            "{0} ha dato {1} un abbraccio standard da palude",
+            "{1} ha segnalato accidentalmente la cosa sbagliata, quindi {0} gli ha dato un abbraccio per smettere {1} di piangere",
+            "{0} dà {1} un abbraccio alla zuppa di cereali",
+            "{0} si sono abbracciati {1} così forte che sono esplosi in una nuvola di peperoni",
+            "{0} va ad abbracciare {1}, che bella amicizia.",
+            "{0} abbraccia con successo {1} il potere del Wumpus.",
+            "{0} mi ha mandato {1} un po 'di amore, ne ricevo un po' anch'io?",
+            "{1} si è abbassato quando {0} ha cercato di abbracciarli.",
+            "{0} abbracciato {1} ma {1} lo ha preso come un attacco!",
+            "{0} riempie {1} di dolce amore",
+            "{0} ha dato {1} un Legacy Hug, in riconoscimento del leggendario Dabbit Prime.",
+            "È {0} sicuro di voler abbracciare {1}? Certo, come hanno appena fatto! ',
+            "{0} tenta di abbracciarsi {1} ma Dannysaur ha gettato una buccia di banana sul pavimento e {0} è scivolato",
+            "{1} è confuso se i cereali sono zuppa o insalata, quindi {0} abbracciati {1} per calmarli"
         ]
 
      
             
     @commands.command()
     async def fight(self, ctx, user: discord.Member):
-        """Fight someone to show them how strong you are!"""
+        """Lotta contro qualcun'altro per fargli vedere chi comanda!"""
         await ctx.send(random.choice(self.fights).format(ctx.author.name, user.name, ctx.guild.owner.name))
 
 
     @commands.command()
     async def hug(self, ctx, user: discord.Member):
-        """Hug someone to show them how much you love them!"""
+        """Abbraccia qualcuno per fargli vedere quanto gli vuoi bene!"""
         await ctx.send(random.choice(self.hugs).format(ctx.author.name, user.name))
 
         
